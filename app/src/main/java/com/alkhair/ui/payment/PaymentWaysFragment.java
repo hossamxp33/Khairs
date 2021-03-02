@@ -95,15 +95,10 @@ public class PaymentWaysFragment extends Fragment {
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
-
                 }
             mFragmentManager.popBackStack();
-
             }
-
         });
-
-
 
         if (id == null) {
             binding.loginConstraint.setVisibility(View.VISIBLE);
@@ -111,7 +106,6 @@ public class PaymentWaysFragment extends Fragment {
         else {
             binding.loginConstraint.setVisibility(View.GONE);
         }
-
 
         binding.donation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -163,27 +157,6 @@ public class PaymentWaysFragment extends Fragment {
         intent.putExtra("radioIndex", radioIndex);
         intent.putExtra("amount",input_amount);
         startActivity(intent);
-
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getView() == null) {
-            return;
-        }
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-                     BroadcastHelper.sendInform(getActivity(), "hide_main_icon");
-                }
-
-                return false;
-            }
-        });
     }
 
 }

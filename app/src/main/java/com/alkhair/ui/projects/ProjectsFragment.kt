@@ -39,10 +39,10 @@ import kotlinx.android.synthetic.main.fragment_projects.*
 
 
 class ProjectsFragment : Fragment() {
-   lateinit var binding: FragmentProjectsBinding
+    lateinit var binding: FragmentProjectsBinding
     lateinit var helper: PreferenceHelper
     lateinit var projectsViewModel: ProjectsViewModel
-     var activity: MainActivity? = null
+    var activity: MainActivity? = null
     private var mLastClickTime: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +62,7 @@ class ProjectsFragment : Fragment() {
         }
 
         helper = PreferenceHelper(getActivity())
+
         val mLayoutManager = GridLayoutManager(getActivity(), 3)
         binding.projects.layoutManager = mLayoutManager
         projectsViewModel = ViewModelProviders.of(this).get(ProjectsViewModel::class.java)
@@ -84,22 +85,14 @@ class ProjectsFragment : Fragment() {
                             val adapter = ProjectTypesAdapter(getActivity(), this@ProjectsFragment, responseModel.result)
                             binding.projects.adapter = adapter
                         }
+
                     }
                 }
-            }else
-            {
+            } else {
                 Utility.hideDialog()
                 Toast.makeText(getActivity(), getString(R.string.connection_error), Toast.LENGTH_LONG).show()
             }
-
         }
-
     }
-
-
-
-
-
-
 
 }
