@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">Kuwait Al Khair</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="projects">Projects</string>
+    <string name="partners">Partners</string>
+    <string name="campaign">Campaign</string>
+    <string name="campaign_details">Campaign Details</string>
+
+
+    <string name="news">News</string>
+    <string name="newsdetails">News Details</string>
+
+    <string name="donation_ways">Donation ways</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="my_profile">My profile</string>
+    <string name="lang">Language</string>
+    <string name="logOut">Log out</string>
+
+    <string name="donationNow">Donation now</string>
+    <string name="events">Events</string>
+    <string name="donationProject">Donation to project</string>
+    <string name="donationAssociation">Donation to Association</string>
+    <string name="mosques">Mosques</string>
+    <string name="drilling_wells">Drilling wells</string>
+    <string name="Health_centers">Health centers</string>
+    <string name="entervalue">Please enter the donation amount</string>
+    <string name="ok">Ok</string>
+
+    <string name="schools">Schools</string>
+    <string name="help">Help</string>
+    <string name="familyProduct">"Productive families "</string>
+    <string name="charitable_endowment">Charitable</string>
+    <string name="education">Education</string>
+    <string name="healthCare">Health care</string>
+    <string name="orphanage">" Orphanage"</string>
+    <string name="publicAdds">general adds</string>
+    <string name="genralPro">General projects</string>
+    <string name="groups">Groups</string>
+    <string name="poor">Poor housing</string>
+    <string name="details">Project Details</string>
+    <string name="charity_details">Charity Details</string>
+
+
+    <string name="english">English</string>
+    <string name="arabic">عربي</string>
+    <string name="user_name">User name</string>
+    <string name="email">Email</string>
+    <string name="fname">First name</string>
+    <string name="lname">Last name</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="save">Save</string>
+    <string name="name">Name</string>
+    <string name="message">Message</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="login">Login</string>
+    <string name="create_account">Register as new user</string>
+    <string name="guest">Login as guest</string>
+    <string name="should_login">you should login first</string>
+
+    <string name="confirm">Confirm password</string>
+    <string name="questation">Question</string>
+    <string name="answer">Secret answer</string>
+    <string name="send">Send</string>
+    <string name="new_member">Registration</string>
+    <string name="Loading">Loading...</string>
+    <string name="connection_error">Connection error</string>
+    <string name="con">Confirm</string>
+    <string name="changePassword">Change password</string>
+    <string name="donation_now">Donation now</string>
+    <string name="failed">Failed to load data</string>
+    <string name="no_result">No result to show</string>
+    <string name="proName">Project name</string>
+    <string name="cost">Project Cost</string>
+    <string name="cash">Cash collection</string>
+    <string name="remaining_amount">Remaining</string>
+
+    <string name="type">Type</string>
+
+    <string name="constractions">
+        Dear Donor / By choosing you a philanthropist (he does not wosh to correspond), you will not receive the donation letter via e-mail or on a mobile phone
+    </string>
+    <string name="empty">Please fill all fields</string>
+    <string name="close">Close</string>
+    <string name="emailError">Your email is not correct</string>
+    <string name="phoneError">Phone digits should be 8</string>
+    <string name="passwordNotMatched">Password and confrim password not matched</string>
+    <string name="error">Error ... tray again</string>
+    <string name="my_donations">My donations</string>
+    <string name="paymentWay">Payment way</string>
+    <string name="tID">Transaction ID</string>
+    <string name="value">Value (DK)</string>
+</resources>

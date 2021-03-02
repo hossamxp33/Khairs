@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.alkhair.ui.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_kwait_elkhir"
+        android:name="com.alkhair.ui.kawuitElkhir.KawuitElkhairFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_kawuit_elkhair" />
+
+    <fragment
+        android:id="@+id/nav_projects"
+        android:name="com.alkhair.ui.projects.ProjectsFragment"
+        android:label="@string/projects"
+        tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/nav_partners"
+        android:name="com.alkhair.ui.partners.PartnersFragment"
+        android:label="@string/partners"
+        tools:layout="@layout/fragment_partners" />
+    <fragment
+        android:id="@+id/nav_campaign"
+        android:name="com.alkhair.ui.campaign.CampaignFragment"
+        android:label="@string/campaign"
+        tools:layout="@layout/fragment_campaign" />
+    <fragment
+        android:id="@+id/nav_news"
+        android:name="com.alkhair.ui.news.NewsFragment"
+        android:label="@string/news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/nav_donation"
+        android:name="com.alkhair.ui.MyDonations.DonationsFragment"
+        android:label="@string/donation_ways"
+        tools:layout="@layout/fragment_donations" />
+    <fragment
+        android:id="@+id/nav_contact_us"
+        android:name="com.alkhair.ui.contactus.ContactUsFragment"
+        android:label="@string/contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/nav_myProfile"
+        android:name="com.alkhair.ui.profile.MyProfileFragment"
+        android:label="@string/my_profile"
+        tools:layout="@layout/fragment_my_profile" />
+    <fragment
+        android:id="@+id/nav_lang"
+        android:name="com.alkhair.ui.language.LanguageActivity"
+        android:label="@string/arabic"
+        tools:layout="@layout/fragment_language" />
+</navigation>

@@ -1,0 +1,47 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/d</item>
+
+    </style>
+
+    <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="NavigationDrawerStyle">
+
+        <item name="android:textSize">20sp</item><!-- text size in menu-->
+
+    </style>
+
+    <style name="requests_form_linear">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginBottom">10sp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:background">@drawable/linear_background</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:padding">20sp</item>
+    </style>
+
+
+    <style name="requests_form_edit_text">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:singleLine">false</item>
+    </style>
+</resources>

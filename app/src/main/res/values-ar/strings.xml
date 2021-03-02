@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">كويت الخير</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="charity_details">تفاصيل المنظمة</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">الرئيسيه</string>
+    <string name="projects">المشاريع</string>
+    <string name="partners">الشركاء</string>
+    <string name="campaign">الحملات الخيريه</string>
+    <string name="campaign_details">تفاصيل</string>
+    <string name="newsdetails">تفاصيل الاخبار</string>
+    <string name="entervalue">الرجاء ادخال قيمة التبرع</string>
+    <string name="ok">حسنا</string>
+
+    <string name="news">الأخبار</string>
+    <string name="donation_ways">طرق التبرع</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="my_profile">حسابي</string>
+    <string name="lang">اللغه</string>
+    <string name="logOut">خروج</string>
+
+    <string name="donationNow">تبرع الان</string>
+    <string name="events">الاحداث</string>
+    <string name="donationProject">تبرع الي مشروع</string>
+    <string name="donationAssociation">تبرع الي موْسسة</string>
+    <string name="mosques">مساجد</string>
+    <string name="drilling_wells">حفر الابار</string>
+    <string name="Health_centers">مراكز الصحه</string>
+    <string name="schools">بناء مدارس</string>
+    <string name="help">الاغاثه</string>
+    <string name="familyProduct">"الاسر المنتجه "</string>
+    <string name="charitable_endowment">الوقف الخيري</string>
+    <string name="education">دعم التعليم</string>
+    <string name="healthCare">رعايه صحيه</string>
+    <string name="orphanage">" دورأيتام"</string>
+    <string name="publicAdds">مساهمات عامه</string>
+    <string name="genralPro">مشاريع عامه</string>
+    <string name="groups">مركز تحفيظ</string>
+    <string name="poor">مساكن فقراء</string>
+    <string name="details">تفاصيل المشروع</string>
+    <string name="cash">تحصيل نقدي</string>
+    <string name="type">النوع</string>
+
+    <string name="english">الانجليزيه</string>
+    <string name="arabic">عربي</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="fname">الاسم الاول</string>
+    <string name="lname">اسم العائله</string>
+    <string name="phoneNumber">رقم الهاتف</string>
+    <string name="country">البلد</string>
+    <string name="city">المدينه</string>
+    <string name="save">حفظ</string>
+    <string name="name">الاسم</string>
+    <string name="message">الرساله</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">كلمه السر</string>
+    <string name="forget_password">نسيت كلمه السر؟</string>
+    <string name="login">تسجيل دخول </string>
+    <string name="create_account">تسجيل كمستخدم جديد</string>
+    <string name="guest">دخول كَ ضيف </string>
+    <string name="constractions">
+عزيزي المتبرع / باختيارك فاعل خير (لا يرغب في المراسلة) ، لن تتلقى رسالة التبرع عبر البريد الإلكتروني أو الهاتف المحمول    </string>
+    <string name="confirm">تاكيد كلمه السر</string>
+    <string name="questation">اختار السؤال</string>
+    <string name="answer">الجواب السري</string>
+    <string name="send">ارسال</string>
+    <string name="new_member">تسجيل عضو جديد</string>
+    <string name="Loading">تحميل</string>
+    <string name="connection_error">خطأ فى الأتصال</string>
+    <string name="con">تأكيد</string>
+    <string name="remaining_amount">المتبقي</string>
+
+    <string name="changePassword">تغيير كلمه المرور</string>
+    <string name="donation_now">تبرع الان</string>
+    <string name="failed">خطـأ اثناء تحميل البيانات</string>
+    <string name="no_result">لا يوجد نتائج</string>
+    <string name="proName">اسم المشروع</string>
+    <string name="cost">تكلفة المشروع</string>
+    <string name="empty">برجاء ملئ جميع الحقول</string>
+    <string name="close">Close</string>
+    <string name="emailError">خطأ فى الايميل</string>
+    <string name="phoneError">خطـأ فى رقم الهاتف</string>
+    <string name="passwordNotMatched">الرقم السري وتأكيد الرقم السري غير متطابقين</string>
+    <string name="error">حدث خطأ برجاء المحاوله مره أخري</string>
+    <string name="my_donations">مدفوعاتي</string>
+    <string name="should_login">يجب تسجيل الدخول اولا</string>
+
+    <string name="paymentWay">طريقه الدفع</string>
+    <string name="tID">رقم العمليه</string>
+    <string name="value">القيمه(درهم كويتي)</string>
+</resources>
