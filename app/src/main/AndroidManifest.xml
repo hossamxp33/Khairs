@@ -10,6 +10,7 @@
 
     <application
         android:name=".helper.MyApplication"
+
         android:allowBackup="true"
         android:configChanges="screenSize|orientation"
         android:fullBackupContent="true"
@@ -30,6 +31,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"
+
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.language.LanguageActivity"

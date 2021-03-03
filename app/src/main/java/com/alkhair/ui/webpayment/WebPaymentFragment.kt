@@ -1,8 +1,9 @@
 package com.dalil.dalilcom.presentation.homepage.morefragment.contactus.aboutdalil
 
-import android.os.Bundle
-import android.os.PersistableBundle
-import android.os.SystemClock
+import android.app.PendingIntent.getActivity
+import android.content.Context
+import android.content.res.Configuration
+import android.os.*
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.alkhair.R
 import com.alkhair.databinding.PaymentFragmentBinding
 import com.alkhair.helper.BroadcastHelper
 import com.alkhair.helper.PreferenceHelper
+import com.alkhair.helper.Utility
 import com.alkhair.ui.MainActivity
 import com.alkhair.ui.payment.PaymentWaysFragment
 import com.alkhair.ui.projects.ProjectDetailsFragment
@@ -29,11 +31,11 @@ import com.alkhair.ui.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_projects.*
 import kotlinx.android.synthetic.main.payment_fragment.view.*
-import kotlinx.android.synthetic.main.project_details_item.*
+import java.util.*
 
 
 class WebPaymentFragment: AppCompatActivity() {
-var webVieww : WebView ? = null
+    var webVieww : WebView ? = null
       var helper: PreferenceHelper ? = null
     var strUserTypeId : Int ? = null
     var lastamout : String ? = null
@@ -42,12 +44,17 @@ var webVieww : WebView ? = null
     var data : ProjectDetailsResponseModel.ResultBean ? = null
     var inside_data: Result ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
+
         val binding = DataBindingUtil.setContentView<PaymentFragmentBinding>(this, R.layout.payment_fragment)
 
         webVieww = binding.webview
         helper = PreferenceHelper(this)
         val userid = helper!!.getuser_id()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Utility.setLocale(this, helper!!.getLang())};
         var extras = intent.extras
 
         var radioIndex   = extras!!.getInt("radioIndex")
@@ -83,7 +90,6 @@ var webVieww : WebView ? = null
 // Enable Javascript  //http://test.e.net.kw/kuwaitalkhairwebsite/mobile?strDonationTypeID=2&strProjectID=78&strProjectTypeID=14&strProjectCharityId=11&strPaymentTypeId=1&strUserTypeId=0&strDonationAmount=12
         val webSettings = webVieww!!.getSettings()
         webSettings.setJavaScriptEnabled(true)
-
         // Force links and redirects to open in the WebView instead of in a browser
         webVieww!!.setWebViewClient(WebViewClient())
     }

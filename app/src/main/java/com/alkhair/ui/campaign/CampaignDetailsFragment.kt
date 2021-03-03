@@ -38,7 +38,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.alkhair.Models.ProjectDetailsResponseModel
-import com.alkhair.databinding.ProjectDetailsItemBinding
 
 import com.alkhair.helper.Utility.isConnectedToInternet
 import com.alkhair.ui.chairtydetails.donationfragment.InsideProjectDetailsAdapter
@@ -103,10 +102,11 @@ class CampaignDetailsFragment : Fragment() {
         val cash_Collect = mydata.collectedAmount
         val res = project_cost - cash_Collect
         binding.remainingValue.text =(res).toString();
+        (activity as MainActivity).setTittle(resources.getString(R.string.campaign_details))
 
        binding.detailstext.setOnClickListener(View.OnClickListener {
            pDialog = SweetAlertDialog(activity, SweetAlertDialog.SUCCESS_TYPE)
-           pDialog.setTitleText(R.string.details)
+           pDialog.setTitleText(R.string.campaign_details)
            pDialog.setContentText(result!!.getProjectDescription_Ar())
            pDialog.setConfirmText("OK")
            pDialog.show()
@@ -146,13 +146,24 @@ class CampaignDetailsFragment : Fragment() {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        helper = PreferenceHelper(activity)
-        (activity as MainActivity).setTittle(resources.getString(R.string.campaign_details))
 
+    override fun onResume() {
+        MainActivity.backFromProjectDetails = false
 
+        super.onResume()
+        if (view == null) {
+            return
+        }
+
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                (activity as MainActivity).supportActionBar!!.show()
+            }
+            //    BroadcastHelper.sendInform(activity as MainActivity, "go_to_home")
+            false
+        }
     }
-
 
 }

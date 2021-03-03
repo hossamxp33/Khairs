@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         helper = new PreferenceHelper(this);
@@ -175,10 +177,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         fm.popBackStack();
                     }
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+
                     setTittle(getResources().getString(R.string.menu_home));
                     HomeFragment homeFragment = new HomeFragment();
                     showFragment(homeFragment);
-              //      drawer.closeDrawer(GravityCompat.START);
+                   drawer.closeDrawer(GravityCompat.START);
 
 
                 }
@@ -578,12 +582,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         actionBar.setDisplayHomeAsUpEnabled(true);
                         if (helper.getLang().equals("ar")) {
                             actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
+                            setTittle("الرئيسية");
 
                         } else {
                             actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
+                            setTittle(getResources().getString(R.string.menu_home));
 
                         }
-                        setTittle(getResources().getString(R.string.menu_home));
                         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         // clear all fragments
 
@@ -633,5 +638,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+
 
 }

@@ -57,6 +57,8 @@ class ChairtyDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.chairty_details, container, false)
         (activity as MainActivity).hideImageIcon()
         (activity as MainActivity).setTittle(getResources().getString(R.string.charity_details))
+        (activity as MainActivity).findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
+
         (activity as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
             fragmentManager!!.popBackStack()
 
@@ -166,7 +168,24 @@ class ChairtyDetailsFragment : Fragment() {
     private fun getViewModelFactory(): MainViewModelFactory {
         return MainViewModelFactory(this.activity!!.application)
     }
+    override fun onResume() {
+        MainActivity.backFromProjectDetails = false
 
+        super.onResume()
+        if (view == null) {
+            return
+        }
+
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                (activity as MainActivity).supportActionBar!!.show()
+            }
+            //    BroadcastHelper.sendInform(activity as MainActivity, "go_to_home")
+            false
+        }
+    }
 
 }
 

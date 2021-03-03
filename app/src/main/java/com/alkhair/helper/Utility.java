@@ -61,5 +61,6 @@ public class Utility {
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+
     }
 }

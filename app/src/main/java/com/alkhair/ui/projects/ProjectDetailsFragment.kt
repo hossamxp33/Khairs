@@ -49,12 +49,16 @@ class ProjectDetailsFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         (activity as MainActivity).setTittle(resources.getString(R.string.details))
         (activity as MainActivity).findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
+
         Log.i("langInDetials", "onCreate: " + Locale.getDefault().displayLanguage)
 
         val projectId = arguments!!.getSerializable("project_id") as Int?
         viewModel.GetProjectsDetails(projectId!!)
 
-   //     helper = PreferenceHelper(activity)
+         helper = PreferenceHelper(activity)
+        (activity as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
+            fragmentManager!!.popBackStack()
+        }
 
 
         viewModel.ProjectsDetailsResponseLD!!.observe(this ,Observer {
@@ -81,17 +85,29 @@ class ProjectDetailsFragment : Fragment() {
 
         })
 
-        (activity as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
-            fragmentManager!!.popBackStack()
-
-
-        }
 
         return binding.root
     }
     private val viewModelFactory: MainViewModelFactory
         get() = MainViewModelFactory(this.activity!!.application)
 
+    override fun onResume() {
+        MainActivity.backFromProjectDetails = true
 
+        super.onResume()
+        if (view == null) {
+            return
+        }
+
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                (activity as MainActivity).supportActionBar!!.show()
+            }
+            //    BroadcastHelper.sendInform(activity as MainActivity, "go_to_home")
+            false
+        }
+    }
 
 }

@@ -21,7 +21,7 @@
             <ImageView
                 android:rotation="180"
                 android:id="@+id/btnBack"
-                android:layout_width="10dp"
+                android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"

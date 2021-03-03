@@ -71,8 +71,9 @@ public class ContactUsFragment extends Fragment implements  View.OnClickListener
 
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
-                HomeFragment homeFragment = new HomeFragment();
-                ((MainActivity) getActivity()).showFragment(homeFragment);
+
+                getFragmentManager().popBackStack();
+                BroadcastHelper.sendInform(getActivity(), "go_to_home");
             }
 
         });

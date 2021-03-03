@@ -76,7 +76,7 @@ public class PaymentWaysAdapter extends RecyclerView.Adapter<PaymentWaysAdapter.
                                                // Replace the previous selected radio button with the current (clicked) one, and "check" it
                                                selectedRadioButton = (RadioButton) v;
                                                selectedRadioButton.setChecked(true);
-                                               paymentWaysFragment.radioIndex = result.get(position).getPaymentTypeId();
+                                               paymentWaysFragment.setRadioIndex(result.get(position).getPaymentTypeId());
                                            }
                                            });
                                        }

@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.alkhair.Adapters.CampaignAdapter;
@@ -64,8 +65,8 @@ public class KawuitElkhairFragment extends Fragment {
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                HomeFragment homeFragment = new HomeFragment();
-                ((MainActivity) getActivity()).showFragment(homeFragment);
+                getFragmentManager().popBackStack();
+                BroadcastHelper.sendInform(getContext(), "go_to_home");
             }
 
         });
@@ -148,6 +149,7 @@ public class KawuitElkhairFragment extends Fragment {
     }
     public void onResume() {
         super.onResume();
+
         MainActivity.backFromProjectDetails = false;
         if (getView() == null) {
             return;

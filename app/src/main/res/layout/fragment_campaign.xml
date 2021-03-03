@@ -14,15 +14,16 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:textDirection="rtl"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layoutDirection="rtl"
+                android:orientation="vertical"
+                android:textDirection="rtl">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/campagin"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

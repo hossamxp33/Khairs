@@ -61,7 +61,7 @@ public class NewsFragment extends Fragment {
         newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
 
         ((MainActivity) getActivity()).hideImageIcon();
-        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.my_donations));
+        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.news));
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -69,8 +69,9 @@ public class NewsFragment extends Fragment {
 
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
-                HomeFragment homeFragment = new HomeFragment();
-                ((MainActivity) getActivity()).showFragment(homeFragment);
+
+                getFragmentManager().popBackStack();
+                BroadcastHelper.sendInform(getActivity(), "go_to_home");
             }});
         getNews();
     }

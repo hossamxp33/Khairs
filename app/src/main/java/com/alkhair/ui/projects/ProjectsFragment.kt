@@ -42,7 +42,6 @@ class ProjectsFragment : Fragment() {
     lateinit var binding: FragmentProjectsBinding
     lateinit var helper: PreferenceHelper
     lateinit var projectsViewModel: ProjectsViewModel
-    var activity: MainActivity? = null
     private var mLastClickTime: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -52,17 +51,16 @@ class ProjectsFragment : Fragment() {
         (getActivity() as MainActivity).hideImageIcon()
         (getActivity() as MainActivity).setTittle(resources.getString(R.string.projects))
         (getActivity() as MainActivity).findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
-        (getActivity() as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
 
-            }
-            mLastClickTime = SystemClock.elapsedRealtime()
-            val homeFragment = HomeFragment()
-            (getActivity() as MainActivity).showFragment(homeFragment)
+        (getActivity() as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
+            BroadcastHelper.sendInform(activity, "go_to_home")
+
+            fragmentManager!!.popBackStack()
+
+
         }
 
         helper = PreferenceHelper(getActivity())
-
         val mLayoutManager = GridLayoutManager(getActivity(), 3)
         binding.projects.layoutManager = mLayoutManager
         projectsViewModel = ViewModelProviders.of(this).get(ProjectsViewModel::class.java)
@@ -94,5 +92,25 @@ class ProjectsFragment : Fragment() {
             }
         }
     }
+    override fun onResume() {
+        MainActivity.backFromProjectDetails = false
+        super.onResume()
+        if (view == null) {
+            return
+        }
+        helper.getlanguage()
+        if(helper.getLang() == "ar") {
+            (activity as MainActivity).setTittle("المشاريع")
+        }
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                ( activity as MainActivity).supportActionBar!!.show()
+            }
+            BroadcastHelper.sendInform(activity, "go_to_home")
 
+            false
+        }
+    }
 }

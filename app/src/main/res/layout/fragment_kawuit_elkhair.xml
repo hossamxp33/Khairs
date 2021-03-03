@@ -12,7 +12,9 @@
             android:layout_height="match_parent"
             android:fillViewport="true"
             android:scrollbars="vertical">
-            <LinearLayout android:id="@+id/scroll_layout"
+
+            <LinearLayout
+                android:id="@+id/scroll_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >

@@ -135,6 +135,7 @@ public class ProjectDetailsAdapter extends RecyclerView.Adapter<ProjectDetailsAd
                     FragmentTransaction mFragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                     mFragmentTransaction.replace(R.id.fragment, fragment);
                     mFragmentTransaction.commit();
+                    mFragmentTransaction.addToBackStack(null);
                     helper.setDonation_amount(String.valueOf(result.get(position).getCollectedAmount()));
                 //    projectsFragment.selectPayment();
                 }

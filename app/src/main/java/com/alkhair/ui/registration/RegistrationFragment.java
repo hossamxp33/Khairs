@@ -49,15 +49,21 @@ public class RegistrationFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         helper = new PreferenceHelper(getActivity());
+        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.regeter));
 
-        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(v -> {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
+        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
+        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
+
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+                getFragmentManager().popBackStack();
+            //    BroadcastHelper.sendInform(getActivity(), "go_to_home");
             }
-            mLastClickTime = SystemClock.elapsedRealtime();
 
-            HomeFragment projectsFragment = new HomeFragment();
-            showFragment(projectsFragment);
         });
 
         binding.logIn.setOnClickListener(new View.OnClickListener() {
@@ -191,4 +197,26 @@ public class RegistrationFragment extends Fragment {
         mFragmentTransaction.commit();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getView() == null) {
+            return;
+        }
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+                  //  BroadcastHelper.sendInform(getActivity(), "go_to_home");
+
+                }
+
+                return false;
+
+            }
+        });
+    }
 }
