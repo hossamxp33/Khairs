@@ -41,6 +41,7 @@ class WebPaymentFragment : AppCompatActivity() {
 
         var radioIndex = extras!!.getSerializable("radioIndex")
         val input_amount = extras!!.getSerializable("amount").toString()
+        val strDonationTypeID = extras!!.getInt("strDonationTypeID").toString()
 
         data = extras!!.getParcelable("data") as ProjectDetailsResponseModel.ResultBean?
         //   inside_data = arguments!!.getSerializable("inside_data") as Result
@@ -63,7 +64,7 @@ class WebPaymentFragment : AppCompatActivity() {
 
             lastamout = input_amount
 
-            webVieww!!.loadUrl("http://test.e.net.kw/kuwaitalkhairwebsite/mobile?strDonationTypeID=2&strProjectID=${data!!.projectId}&strProjectTypeID=${data!!.projectTypeId}&strProjectCharityId=${data!!.charityId}&strPaymentTypeId=${radioIndex}&strUserTypeId=0&strDonationAmount=${lastamout}")
+            webVieww!!.loadUrl("http://test.e.net.kw/kuwaitalkhairwebsite/mobile?strDonationTypeID=${strDonationTypeID}&strProjectID=${data!!.projectId}&strProjectTypeID=${data!!.projectTypeId}&strProjectCharityId=${data!!.charityId}&strPaymentTypeId=${radioIndex}&strUserTypeId=0&strDonationAmount=${lastamout}")
 //                          http://test.e.net.kw/kuwaitalkhairwebsite/mobile?strDonationTypeID=1&strProjectID=116&strProjectTypeID=6&strProjectCharityId=26&strPaymentTypeId=1&strUserTypeId=0&strDonationAmount=12
         }
 

@@ -130,7 +130,9 @@ public class ProjectDetailsAdapter extends RecyclerView.Adapter<ProjectDetailsAd
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("data", result.get(position));
                     bundle.putSerializable("amount", input_amount);
-                    Fragment fragment  = new PaymentWaysFragment();
+                        bundle.putInt("strDonationTypeID ", 6);
+
+                        Fragment fragment  = new PaymentWaysFragment();
                     fragment.setArguments(bundle);
                     FragmentTransaction mFragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                     mFragmentTransaction.replace(R.id.fragment, fragment);

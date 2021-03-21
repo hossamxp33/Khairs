@@ -123,6 +123,8 @@ class CampaignDetailsFragment : Fragment() {
                   val bundle = Bundle()
                   bundle.putSerializable("amount", input_amount)
                   bundle.putParcelable("data", result)
+                  bundle.putInt("strDonationTypeID ", 6)
+
                   val fragment = PaymentWaysFragment()
                   fragment.arguments = bundle
                   val mFragmentTransaction = mFragmentManager.beginTransaction()

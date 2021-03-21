@@ -134,7 +134,9 @@ public class InsideProjectDetailsAdapter extends RecyclerView.Adapter<InsideProj
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("amount", input_amount);
                     bundle.putParcelable("data", result.get(position));
-                    Fragment fragment  = new PaymentWaysFragment();
+                        bundle.putInt("strDonationTypeID ", 5);
+
+                        Fragment fragment  = new PaymentWaysFragment();
                     fragment.setArguments(bundle);
                     FragmentTransaction mFragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                     mFragmentTransaction.replace(R.id.fragment, fragment);

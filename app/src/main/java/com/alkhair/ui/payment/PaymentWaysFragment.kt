@@ -64,7 +64,7 @@ class PaymentWaysFragment : Fragment() {
     internal var actionBar: ActionBar? = null
     private val mLastClickTime: Long = 0
 
-
+var strDonationTypeID = 0
     //  private ArrayList<CharityProjects> inside_result;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -89,6 +89,7 @@ class PaymentWaysFragment : Fragment() {
 
         inside_data = arguments!!.getSerializable("inside_data") as Result?
         input_amount = arguments!!.getSerializable("amount")!!.toString()
+        strDonationTypeID  = arguments!!.getInt("strDonationTypeID ")
 
         val id = helper.getuser_id()
         (activity as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
@@ -146,6 +147,7 @@ class PaymentWaysFragment : Fragment() {
         intent.putExtra("data", result)
         intent.putExtra("radioIndex", radioIndex)
         intent.putExtra("amount", input_amount)
+        intent.putExtra("strDonationTypeID", strDonationTypeID)
 
         startActivity(intent)
     }

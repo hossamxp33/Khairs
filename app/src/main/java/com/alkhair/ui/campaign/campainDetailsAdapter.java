@@ -111,6 +111,7 @@ public class campainDetailsAdapter extends RecyclerView.Adapter<campainDetailsAd
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("amount", input_amount);
                     bundle.putSerializable("data", result.get(position));
+                    bundle.putInt("strDonationTypeID ", 6);
 
                     Fragment fragment  = new PaymentWaysFragment();
                     fragment.setArguments(bundle);
