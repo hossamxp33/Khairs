@@ -85,7 +85,7 @@ class PaymentWaysFragment : Fragment() {
 
         mFragmentManager = activity!!.supportFragmentManager
 
-        result = arguments!!.getSerializable("data") as ProjectDetailsResponseModel.ResultBean?
+        result = arguments!!.getParcelable("data") as ProjectDetailsResponseModel.ResultBean?
 
         inside_data = arguments!!.getSerializable("inside_data") as Result?
         input_amount = arguments!!.getSerializable("amount")!!.toString()
@@ -159,7 +159,6 @@ class PaymentWaysFragment : Fragment() {
         }
         helper.getlanguage()
         if(helper.getLang() == "ar") {
-         //   (activity as MainActivity).setTittle("alaa")
 
         }
         view!!.isFocusableInTouchMode = true

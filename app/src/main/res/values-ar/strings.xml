@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">كويت الخير</string>
+    <string name="google_maps_key">AIzaSyB9-VC7363d43Kwh2Kc4QWMvEXGTdL7dS4</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="charity_details">تفاصيل المنظمة</string>
 
@@ -74,7 +75,7 @@
     <string name="answer">الجواب السري</string>
     <string name="send">ارسال</string>
     <string name="new_member">تسجيل عضو جديد</string>
-    <string name="Loading">تحميل</string>
+    <string name="Loading">جارى تحميل...</string>
     <string name="connection_error">خطأ فى الأتصال</string>
     <string name="con">تأكيد</string>
     <string name="remaining_amount">المتبقي</string>
@@ -97,4 +98,11 @@
     <string name="paymentWay">طريقه الدفع</string>
     <string name="tID">رقم العمليه</string>
     <string name="value">القيمه(درهم كويتي)</string>
+    <string name="aboutChart">عن الجمعية</string>
+    <string name="aboutdonation"> رؤية الجمعية </string>
+
+    <string name="projDont">مشاريع التبرع</string>
+    <string name="chirtyGoal">هدف الجمعيه</string>
+    <string name="contactinfo">بيانات الاتصال</string>
+    <string name="projectlocation">موقع المشروع</string>
 </resources>

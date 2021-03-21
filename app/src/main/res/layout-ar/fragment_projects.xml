@@ -4,38 +4,57 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:background="@color/white"
         android:orientation="vertical">
-        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/projects_cell"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layoutDirection="ltr"
             android:orientation="vertical">
 
             <LinearLayout
-                android:textDirection="rtl"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/projects"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:id="@+id/error"
+                    android:text="@string/connection_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/medium_text_size"
+                    android:visibility="gone"/>
             </LinearLayout>
+
         </ScrollView>
     </LinearLayout>
 </layout>

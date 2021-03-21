@@ -3,22 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/white"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            >
 
             <RelativeLayout
                 android:id="@+id/backImage"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="310dp"
                 android:background="@drawable/clear_reduisbackground" />
 
             <RelativeLayout
@@ -35,22 +37,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="4dp"
                     android:layout_toStartOf="@+id/detailstext"
-                    android:background="@drawable/details_background"
                     android:maxLength="30"
                     android:padding="8dp"
                     android:textColor="@color/white">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:padding="8dp"
-                    android:background="@drawable/details_background"
-                    android:textColor="@color/white"
-                    android:visibility="gone">
 
                 </TextView>
 
@@ -59,35 +48,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/details_background"
                     android:padding="8dp"
                     android:text="@string/details"
                     android:textColor="@color/white"
                     android:visibility="visible" />
 
-                <LinearLayout
-                    android:id="@+id/linear"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="15dp"
-                    android:background="@drawable/details_background"
-                    android:orientation="vertical"
+                    android:textColor="@color/white"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:text="@string/details"
-                        android:textColor="@color/white"></TextView>
+                </TextView>
 
-                </LinearLayout>
+
             </RelativeLayout>
             <!-- details-->
             <LinearLayout
-                android:id="@+id/ddd"
+                android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dd">
@@ -104,29 +88,29 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/gray"
-                            android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:visibility="gone"></TextView>
-
-                        <TextView
                             android:id="@+id/tID"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cash"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="18dp"
-                            android:textStyle="normal"></TextView>
+                            android:textSize="@dimen/medium_text_size"
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/cash_collect"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/gray"
-                            android:textSize="14sp"></TextView>
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/type"
@@ -135,7 +119,7 @@
                             android:text="@string/type"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/medium_text_size"
-                            android:textStyle="normal"></TextView>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/typeValue"
@@ -144,12 +128,10 @@
                             android:text="@string/type"
                             android:textColor="@color/gray"
                             android:textSize="14sp"
-                            android:textStyle="normal"></TextView>
-
+                            android:textStyle="normal" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/asds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -161,14 +143,16 @@
                             android:layout_height="wrap_content"
                             android:text="@string/cost"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/medium_text_size"></TextView>
+                            android:textSize="@dimen/medium_text_size"
+                            android:textStyle="normal"></TextView>
 
                         <TextView
                             android:id="@+id/price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/gray"
-                            android:textSize="14sp"></TextView>
+                            android:textSize="14sp"
+                            android:textStyle="bold"></TextView>
 
                         <TextView
                             android:id="@+id/remaining_amount"
@@ -190,6 +174,8 @@
 
                             />
                     </LinearLayout>
+
+
                 </RelativeLayout>
             </LinearLayout>
 
@@ -197,25 +183,28 @@
                 android:id="@+id/relativeLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ddd"
+                android:layout_below="@+id/details"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ddd">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <AutoCompleteTextView
                     android:id="@+id/amount"
                     style="@style/requests_form_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:hint="@string/donationNow"
+                    android:layout_marginEnd="20dp"
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal"
-                    android:hint="@string/donation_now"
                     android:maxLines="1"
+                    android:text=""
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black_trans_dark"
@@ -229,16 +218,15 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:layout_below="@+id/relativeLayout4"
-                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/button_background"
                 android:text="@string/donation_now"
                 android:textColor="@color/white"
-
                 android:visibility="visible" />
 
         </RelativeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

@@ -65,7 +65,7 @@ public  class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.CampV
                     return;
                 }
                 Bundle bundle = new Bundle();
-                 bundle.putSerializable("data",  result.get(position));
+                 bundle.putParcelable("data",  result.get(position));
                 Fragment fragment  = new CampaignDetailsFragment();
                 fragment.setArguments(bundle);
                 FragmentTransaction mFragmentTransaction = activity.getSupportFragmentManager().beginTransaction();

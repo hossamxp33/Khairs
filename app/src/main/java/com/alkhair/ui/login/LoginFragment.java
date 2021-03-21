@@ -32,7 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends AppCompatActivity implements View.OnClickListener {
 
     private long mLastClickTime = 0;
     private FragmentLoginBinding binding;
@@ -42,54 +42,52 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private FragmentManager mFragmentManager;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // Inflate the layout for this fragment
         //// Check Login
-        helper = new PreferenceHelper(getActivity());
+        helper = new PreferenceHelper(getApplicationContext());
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
-        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
-
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
-
-                getFragmentManager().popBackStack();
-                BroadcastHelper.sendInform(getActivity(), "go_to_home");
-            }
-
-        });
-        binding.guest.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
-
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
-                showFragment( new HomeFragment());
-
-            }
-        });
-        mFragmentManager = getActivity().getSupportFragmentManager();
-        return binding.getRoot();
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-
-        super.onActivityCreated(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_login);
         binding.createAccount.setOnClickListener(this);
         binding.forgetPassword.setOnClickListener(this);
         binding.logIn.setOnClickListener(this);
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+//            ((MainActivity) getApplicationContext()).setTittle(getResources().getString(R.string.login));
+
+//        ((MainActivity) getApplicationContext()).setTittle(getResources().getString(R.string.login));
+//        ((MainActivity) getApplicationContext()).hideImageIcon();
+//        ((MainActivity) getApplicationContext()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
+//        ((MainActivity) getApplicationContext()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
+//
+//            public void onClick(View v) {
+//                if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
+//
+//                }
+//                mLastClickTime = SystemClock.elapsedRealtime();
+//
+//                getFragmentManager().popBackStack();
+//                BroadcastHelper.sendInform(getApplicationContext(), "go_to_home");
+//            }
+
+   //     });
+        binding.guest.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+                    Intent intent = new Intent(LoginFragment.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+            }
+        });
 
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -109,18 +107,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
                // BroadcastHelper.sendInform(getActivity(), "registration");
-                    RegistrationFragment register = new RegistrationFragment();
-                    showFragment(register);
-
+                    Intent intent = new Intent(LoginFragment.this, RegistrationFragment.class);
+                    startActivity(intent);
+                    finish();
                     break;
             case R.id.forgetPassword:
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
-                ForgetPasswordFragment forgetPasswordFragment = new ForgetPasswordFragment();
-                  showFragment(forgetPasswordFragment);
-             //   BroadcastHelper.sendInform(getActivity(), "reset_password");
+//                ForgetPasswordFragment forgetPasswordFragment = new ForgetPasswordFragment();
+//                  showFragment(forgetPasswordFragment);
+               BroadcastHelper.sendInform(LoginFragment.this, "reset_password");
                 break;
 
         }
@@ -162,7 +160,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
 
-        Utility.showDialog(getActivity());
+        Utility.showDialog(LoginFragment.this);
         loginViewModel.Login(emil, password, new GetCallBack() {
             @Override
             public void getCallBack(boolean isOk, int requestCode, Object o) {
@@ -170,25 +168,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     Utility.hideDialog();
                     LoginResponseModel response = (LoginResponseModel) o;
                     if (response.getSuccess().equals("true")) {
-                        Utility.hideKeyboard(getActivity());
+                        Utility.hideKeyboard(getApplicationContext());
                         helper.addData("email",response.getResult().getEmail());
                         helper.setIsLogin("true");
                         helper.setuser_id(String.valueOf(response.getResult().getRegistrationId()));
 
-                        showFragment( new HomeFragment());
+                     //   showFragment( new HomeFragment());
 
-                        ((Activity) getActivity()).overridePendingTransition(0, 0);
-                    //    BroadcastHelper.sendInform(getActivity(), "go_to_home");
+             //           ((Activity) getApplicationContext()).overridePendingTransition(0, 0);
+                        Intent intent = new Intent(LoginFragment.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                //      BroadcastHelper.sendInform(LoginFragment.this, "go_to_home");
 
                     } else {
-                        Utility.hideKeyboard(getActivity());
-                        Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                        Utility.hideKeyboard(getApplicationContext());
+                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
 
                     }
                 } else {
-                    Utility.hideKeyboard(getActivity());
+                    Utility.hideKeyboard(getApplicationContext());
                     Utility.hideDialog();
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -199,23 +200,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        if (getView() == null) {
-            return;
-        }
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-                  BroadcastHelper.sendInform(getActivity(), "go_to_home");
 
-                }
 
-                return false;
+        BroadcastHelper.sendInform(this, "go_to_home");
 
-            }
-        });
+        ;
     }
 }

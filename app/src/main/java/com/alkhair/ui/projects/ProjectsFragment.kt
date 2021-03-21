@@ -1,41 +1,26 @@
 package com.alkhair.ui.projects
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
-
-import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-
-import com.alkhair.Adapters.CampaignAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.alkhair.Adapters.ProjectTypesAdapter
-import com.alkhair.Models.CampaginResponseModel
 import com.alkhair.Models.ProjecttypesResponseModel
 import com.alkhair.R
-import com.alkhair.ViewModels.CampaignViewModel
 import com.alkhair.ViewModels.ProjectsViewModel
 import com.alkhair.databinding.FragmentProjectsBinding
 import com.alkhair.helper.BroadcastHelper
 import com.alkhair.helper.PreferenceHelper
 import com.alkhair.helper.Utility
-import com.alkhair.helper.interfaces.GetCallBack
-import com.alkhair.ui.MainActivity
-import com.alkhair.ui.campaign.CampaignFragment
-import com.alkhair.ui.ui.home.HomeFragment
-
 import com.alkhair.helper.Utility.isConnectedToInternet
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_projects.*
+import com.alkhair.ui.MainActivity
+import kotlinx.android.synthetic.main.fragment_projects.view.*
 
 
 class ProjectsFragment : Fragment() {
@@ -51,6 +36,7 @@ class ProjectsFragment : Fragment() {
         (getActivity() as MainActivity).hideImageIcon()
         (getActivity() as MainActivity).setTittle(resources.getString(R.string.projects))
         (getActivity() as MainActivity).findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
 
         (getActivity() as MainActivity).findViewById<View>(R.id.btnBack).setOnClickListener {
             BroadcastHelper.sendInform(activity, "go_to_home")
@@ -67,7 +53,6 @@ class ProjectsFragment : Fragment() {
         getProjects()
         return binding.root
     }
-
 
 
     private fun getProjects() {
@@ -92,6 +77,7 @@ class ProjectsFragment : Fragment() {
             }
         }
     }
+
     override fun onResume() {
         MainActivity.backFromProjectDetails = false
         super.onResume()
@@ -99,14 +85,14 @@ class ProjectsFragment : Fragment() {
             return
         }
         helper.getlanguage()
-        if(helper.getLang() == "ar") {
+        if (helper.getLang() == "ar") {
             (activity as MainActivity).setTittle("المشاريع")
         }
         view!!.isFocusableInTouchMode = true
         view!!.requestFocus()
         view!!.setOnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-                ( activity as MainActivity).supportActionBar!!.show()
+                (activity as MainActivity).supportActionBar!!.show()
             }
             BroadcastHelper.sendInform(activity, "go_to_home")
 

@@ -128,7 +128,7 @@ public class ProjectDetailsAdapter extends RecyclerView.Adapter<ProjectDetailsAd
 
                     }else {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("data", result.get(position));
+                    bundle.putParcelable("data", result.get(position));
                     bundle.putSerializable("amount", input_amount);
                     Fragment fragment  = new PaymentWaysFragment();
                     fragment.setArguments(bundle);

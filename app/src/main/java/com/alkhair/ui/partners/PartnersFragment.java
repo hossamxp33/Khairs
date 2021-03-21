@@ -1,6 +1,12 @@
 package com.alkhair.ui.partners;
 
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,19 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.SystemClock;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.alkhair.Adapters.CampaignAdapter;
 import com.alkhair.Adapters.PartnersAdapter;
-import com.alkhair.Models.CampaginResponseModel;
 import com.alkhair.Models.PartnersResponseModel;
 import com.alkhair.R;
-import com.alkhair.ViewModels.CampaignViewModel;
 import com.alkhair.ViewModels.PartnersViewModel;
 import com.alkhair.databinding.FragmentPartnersBinding;
 import com.alkhair.helper.BroadcastHelper;
@@ -30,9 +26,6 @@ import com.alkhair.helper.PreferenceHelper;
 import com.alkhair.helper.Utility;
 import com.alkhair.helper.interfaces.GetCallBack;
 import com.alkhair.ui.MainActivity;
-import com.alkhair.ui.campaign.CampaignFragment;
-import com.alkhair.ui.projects.ProjectsFragment;
-import com.alkhair.ui.ui.home.HomeFragment;
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel;
 
 import static com.alkhair.helper.Utility.isConnectedToInternet;
@@ -40,9 +33,9 @@ import static com.alkhair.helper.Utility.isConnectedToInternet;
 
 public class PartnersFragment extends Fragment {
     FragmentPartnersBinding binding;
-    PreferenceHelper helper ;
- private    PartnersViewModel partnersViewModel;
-     MainViewModel     viewModel;
+    PreferenceHelper helper;
+    private PartnersViewModel partnersViewModel;
+    MainViewModel viewModel;
     private long mLastClickTime = 0;
 
     @Override
@@ -88,7 +81,7 @@ public class PartnersFragment extends Fragment {
 
     private void getpartners() {
         Utility.showDialog(getActivity());
-        partnersViewModel.getPartners( "0",new GetCallBack() {
+        partnersViewModel.getPartners("0", new GetCallBack() {
             @Override
             public void getCallBack(boolean isOk, int requestCode, Object o) {
                 if (isOk) {
@@ -115,6 +108,7 @@ public class PartnersFragment extends Fragment {
     private MainViewModelFactory getViewModelFactory() {
         return new MainViewModelFactory(this.getActivity().getApplication());
     }
+
     @Override
     public void onResume() {
         super.onResume();

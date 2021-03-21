@@ -68,13 +68,13 @@ class CampaignDetailsFragment : Fragment() {
 
         helper = PreferenceHelper(activity)
 
-        val mydata = arguments!!.getSerializable("data") as ProjectDetailsResponseModel.ResultBean
+        val mydata = arguments!!.getParcelable<ProjectDetailsResponseModel.ResultBean>("data")
 
 
             result = mydata
 
         if (helper.lang == "ar") {
-            if (mydata.getProjectName_Ar() != null) {
+            if (mydata!!.getProjectName_Ar() != null) {
                 binding.proName.text = mydata.charityName_Ar
                 binding.name.text = mydata.projectDescription_Ar
 
@@ -85,7 +85,7 @@ class CampaignDetailsFragment : Fragment() {
 
 
         }else{
-            if (mydata.getProjectName_En() != null) {
+            if (mydata!!.getProjectName_En() != null) {
                 binding.proName.text = mydata.charityName_En.toString()
                 binding.name.text = mydata.projectDescription_En.toString()
 
@@ -122,7 +122,7 @@ class CampaignDetailsFragment : Fragment() {
               }else {
                   val bundle = Bundle()
                   bundle.putSerializable("amount", input_amount)
-                  bundle.putSerializable("data", result)
+                  bundle.putParcelable("data", result)
                   val fragment = PaymentWaysFragment()
                   fragment.arguments = bundle
                   val mFragmentTransaction = mFragmentManager.beginTransaction()

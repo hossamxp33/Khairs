@@ -7,36 +7,10 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.alkhair.R;
-import com.alkhair.databinding.ActivityMainBinding;
-import com.alkhair.helper.BroadcastHelper;
-import com.alkhair.helper.PreferenceHelper;
-import com.alkhair.helper.Utility;
-import com.alkhair.ui.MyDonations.DonationsFragment;
-import com.alkhair.ui.campaign.CampaignFragment;
-import com.alkhair.ui.contactus.ContactUsFragment;
-import com.alkhair.ui.kawuitElkhir.KawuitElkhairFragment;
-import com.alkhair.ui.language.LanguageActivity;
-import com.alkhair.ui.login.ForgetPasswordFragment;
-import com.alkhair.ui.login.LoginFragment;
-import com.alkhair.ui.news.NewsFragment;
-import com.alkhair.ui.partners.PartnersFragment;
-import com.alkhair.ui.payment.PaymentActivity;
-import com.alkhair.ui.profile.MyProfileFragment;
-import com.alkhair.ui.projects.ProjectDetailsFragment;
-import com.alkhair.ui.projects.ProjectsFragment;
-import com.alkhair.ui.registration.RegistrationFragment;
-import com.alkhair.ui.ui.home.HomeFragment;
-import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
@@ -50,6 +24,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
+
+import com.alkhair.R;
+import com.alkhair.databinding.ActivityMainBinding;
+import com.alkhair.helper.BroadcastHelper;
+import com.alkhair.helper.PreferenceHelper;
+import com.alkhair.ui.MyDonations.DonationsFragment;
+import com.alkhair.ui.campaign.CampaignFragment;
+import com.alkhair.ui.contactus.ContactUsFragment;
+import com.alkhair.ui.kawuitElkhir.KawuitElkhairFragment;
+import com.alkhair.ui.language.LanguageActivity;
+import com.alkhair.ui.login.ForgetPasswordFragment;
+import com.alkhair.ui.login.LoginFragment;
+import com.alkhair.ui.news.NewsFragment;
+import com.alkhair.ui.partners.PartnersFragment;
+import com.alkhair.ui.payment.PaymentActivity;
+import com.alkhair.ui.projects.ProjectDetailsFragment;
+import com.alkhair.ui.projects.ProjectsFragment;
+import com.alkhair.ui.registration.RegistrationFragment;
+import com.alkhair.ui.ui.home.HomeFragment;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -74,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         toolbar = findViewById(R.id.toolbar);
         helper = new PreferenceHelper(this);
         setSupportActionBar(toolbar);
@@ -84,19 +79,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         initViews();
         final View headerview = navigationView.getHeaderView(0);
+
         headerview.findViewById(R.id.profile).setOnClickListener(this);
 
 
 
-      //  Log.i("getuser_id",helper.getuser_id());
+        //  Log.i("getuser_id",helper.getuser_id());
 
-        if (helper.getFirst_Time() == null ) {
-    if (helper.getuser_id() == null) {
-        showFragment(new LoginFragment());
-        helper.setFirst_Time("1");
+        if (helper.getFirst_Time() == null) {
+            if (helper.getuser_id() == null) {
+                Intent intent = new Intent(this, LoginFragment.class);
+                startActivity(intent);
+                helper.setFirst_Time("1");
+                finish();
 
-    }
-}
+            }
+        }
     }
 
     private void initViews() {
@@ -113,13 +111,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 if (helper.getLang().equals("ar")) {
-                    actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
+                    actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
                 } else {
-                    actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
+                    actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
                 }
-             }
+            }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -128,16 +126,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     navigationView.getMenu().getItem(i).setChecked(false);
                 }
                 if (helper.getLang().equals("ar")) {
-                    actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
+                    actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
                 } else {
-                    actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
+                    actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
                 }
 
             }
         };
-
+        if (helper.getIsLogin() != null && helper.getIsLogin().equals("true")) {
+            navigationView.getMenu().getItem(9).setVisible(true);
+            navigationView.getMenu().getItem(10).setVisible(false);
+        } else {
+            navigationView.getMenu().getItem(9).setVisible(false);
+            navigationView.getMenu().getItem(10).setVisible(true);
+        }
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -145,12 +149,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (helper.getIsLogin() != null && helper.getIsLogin().equals("true")) {
                     navigationView.getMenu().getItem(9).setVisible(true);
                     navigationView.getMenu().getItem(10).setVisible(false);
-
-
                 } else {
                     navigationView.getMenu().getItem(9).setVisible(false);
                     navigationView.getMenu().getItem(10).setVisible(true);
-
                 }
                 drawer.openDrawer(GravityCompat.START);
             }
@@ -177,31 +178,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         fm.popBackStack();
                     }
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setDisplayHomeAsUpEnabled(true);
 
                     setTittle(getResources().getString(R.string.menu_home));
-                    HomeFragment homeFragment = new HomeFragment();
-                    showFragment(homeFragment);
-                   drawer.closeDrawer(GravityCompat.START);
+                    if (id == R.id.nav_home){
+                        drawer.closeDrawer(GravityCompat.START);
+                        actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
+                        toolbar.findViewById(R.id.btnBack).setVisibility(View.GONE);
+                    }else {
+                        HomeFragment homeFragment = new HomeFragment();
+                        showFragment(homeFragment);
+                        drawer.closeDrawer(GravityCompat.START);
+                        actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
+                        toolbar.findViewById(R.id.btnBack).setVisibility(View.GONE);
+                    }
 
 
-                }
-                else if (id == R.id.nav_kwait_elkhir) {
+
+
+                } else if (id == R.id.nav_kwait_elkhir) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
                     }
                     // clear all fragments
                     KawuitElkhairFragment kawuitElkhairFragment = new KawuitElkhairFragment();
                     showFragment(kawuitElkhairFragment);
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else if (id == R.id.nav_projects) {
+                } else if (id == R.id.nav_projects) {
 
                     backFromProjectDetails = false;
 
-                    if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
-
-
-                    }
 
                     toolbar.findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
                     ProjectsFragment projectsFragment = new ProjectsFragment();
@@ -209,8 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     drawer.closeDrawer(GravityCompat.START);
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     setTittle(getResources().getString(R.string.projects));
-                }
-                else if (id == R.id.nav_partners) {
+                } else if (id == R.id.nav_partners) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
 
                     }
@@ -227,8 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setTittle(getResources().getString(R.string.partners));
                     actionBar.setDisplayHomeAsUpEnabled(false);
 
-                }
-                else if (id == R.id.nav_campaign) {
+                } else if (id == R.id.nav_campaign) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
 
                     }
@@ -245,8 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setTittle(getResources().getString(R.string.campaign));
                     actionBar.setDisplayHomeAsUpEnabled(false);
 
-                }
-                else if (id == R.id.nav_news) {
+                } else if (id == R.id.nav_news) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
 
                     }
@@ -262,29 +264,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     drawer.closeDrawer(GravityCompat.START);
                     setTittle(getResources().getString(R.string.news));
                     actionBar.setDisplayHomeAsUpEnabled(false);
-                }
-                else if (id == R.id.nav_donation) {
+                } else if (id == R.id.nav_donation) {
                     backFromProjectDetails = false;
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
                     }
 
-                    toolbar.findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
-                    DonationsFragment donationsFragment = new DonationsFragment();
-                    showFragment(donationsFragment);
-                    drawer.closeDrawer(GravityCompat.START);
-                    setTittle(getResources().getString(R.string.my_donations));
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-
-                    if(helper.getuser_id() != null){
-                        Toast.makeText(getApplicationContext(),getApplicationContext().getString(R.string.my_donations), Toast.LENGTH_LONG).show();
-                    }
-                   else {
-                        Toast.makeText(getApplicationContext(),getApplicationContext().getString(R.string.should_login), Toast.LENGTH_LONG).show();
-
+                    if (helper.getuser_id() != null) {
+                        toolbar.findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
+                        DonationsFragment donationsFragment = new DonationsFragment();
+                        showFragment(donationsFragment);
+                        drawer.closeDrawer(GravityCompat.START);
+                        setTittle(getResources().getString(R.string.my_donations));
+                        actionBar.setDisplayHomeAsUpEnabled(false);
+                    } else {
+                        Toast.makeText(MainActivity.this,R.string.should_login, Toast.LENGTH_SHORT).show();
+                        drawer.openDrawer(GravityCompat.START);
+                        actionBar.setDisplayHomeAsUpEnabled(true);
                     }
 
-                }
-                else if (id == R.id.nav_contact_us) {
+                } else if (id == R.id.nav_contact_us) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
 
                     }
@@ -337,9 +335,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toolbar.setBackgroundColor(getResources().getColor(R.color.white));
 
 
-                }
-
-                else if (id == R.id.nav_logout) {
+                } else if (id == R.id.nav_logout) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
                     }
                     updateUser();
@@ -352,22 +348,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     drawer.closeDrawer(GravityCompat.START);
 
-                }
+                } else if (id == R.id.nav_login) {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
+                    }
+                    FragmentManager fm = MainActivity.this.getSupportFragmentManager();
+                    for (int j = 0; j < fm.getBackStackEntryCount(); ++j) {
+                        fm.popBackStack();
+                    }
+                    fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    toolbar.findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
+                    Intent i = new Intent(MainActivity.this, LoginFragment.class);
+                    startActivity(i);
 
-                else if (id == R.id.nav_login){
-                        if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
-                        }
-                        FragmentManager fm = MainActivity.this.getSupportFragmentManager();
-                        for (int j = 0; j < fm.getBackStackEntryCount(); ++j) {
-                            fm.popBackStack();
-                        }
-                        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        toolbar.findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
-                        LoginFragment loginFragment = new LoginFragment();
-                        showFragment(loginFragment);
-                        drawer.closeDrawer(GravityCompat.START);
-                        setTittle(getResources().getString(R.string.login));
-                        actionBar.setDisplayHomeAsUpEnabled(false);
+                    drawer.closeDrawer(GravityCompat.START);
+                    setTittle(getResources().getString(R.string.login));
+                    actionBar.setDisplayHomeAsUpEnabled(false);
 
 
                 }
@@ -399,10 +394,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if (helper.getLang().equals("ar")) {
-            actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
         } else {
-            actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
         }
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -421,7 +416,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     public void showFragment(Fragment fragment) {
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.pop_out, R.anim.pop_in);
@@ -433,11 +427,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void showIcon() {
         if (helper.getLang().equals("ar")) {
-            actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
-
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
         } else {
-            actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
-
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
         }
     }
 
@@ -458,7 +450,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         active = false;
     }
-
 
 
     @Override
@@ -483,8 +474,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mLastClickTime = SystemClock.elapsedRealtime();
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 setTittle(getResources().getString(R.string.login));
-                LoginFragment logInFragment = new LoginFragment();
-                showFragment(logInFragment);
+                Intent i = new Intent(MainActivity.this, LoginFragment.class);
+                startActivity(i);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
         }
@@ -494,7 +485,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
         if (receiver == null) {
             receiver = new Receiver();
             IntentFilter filter = new IntentFilter(BroadcastHelper.ACTION_NAME);
@@ -504,14 +494,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         if (helper.getLang() != null) {
             if (helper.getLang().equals("ar")) {
-                actionBar.setHomeAsUpIndicator(R.drawable.menu_button);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
             } else {
-                actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
             }
         } else {
-            actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
         }
-
     }
 
 
@@ -530,7 +519,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void hideImageIcon(){
+    public void hideImageIcon() {
         actionBar.setDisplayHomeAsUpEnabled(false);
     }
 
@@ -561,8 +550,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case "reset_password":
                         setTittle(getResources().getString(R.string.changePassword));
-                        ForgetPasswordFragment forgetPasswordFragment = new ForgetPasswordFragment();
-                        showFragment(forgetPasswordFragment);
+                        Intent ForgetPasswordintent = new Intent(MainActivity.this, ForgetPasswordFragment.class);
+                        startActivity(ForgetPasswordintent);
+                        finish();
                         break;
                     case "project_details":
 
@@ -581,11 +571,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         toolbar.findViewById(R.id.btnBack).setVisibility(View.GONE);
                         actionBar.setDisplayHomeAsUpEnabled(true);
                         if (helper.getLang().equals("ar")) {
-                            actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
+                            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
                             setTittle("الرئيسية");
 
                         } else {
-                            actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
+                            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
                             setTittle(getResources().getString(R.string.menu_home));
 
                         }
@@ -601,8 +591,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             fm.popBackStack();
                         }
                         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        RegistrationFragment registerFragment = new RegistrationFragment();
-                        showFragment(registerFragment);
+                        Intent intent = new Intent(MainActivity.this, RegistrationFragment.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     case "go_to_projects":
                         toolbar.findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
@@ -610,11 +601,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         setTittle(getResources().getString(R.string.projects));
                         break;
                     case "go_to_pay_way":
-                        Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
-                        startActivity(intent);
+                        Intent intentt = new Intent(MainActivity.this, PaymentActivity.class);
+                        startActivity(intentt);
                         break;
                     case "hide_main_icon":
-                   //     backFromPay = true;
+                        //     backFromPay = true;
                         if (helper.getLang().equals("ar")) {
                             setTittle(helper.getData("projectNameAr"));
                         } else {
@@ -624,10 +615,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case "back_from_Projects":
                         toolbar.findViewById(R.id.btnBack).setVisibility(View.GONE);
                         if (helper.getLang().equals("ar")) {
-                            actionBar.setHomeAsUpIndicator(R.drawable.menu_button);//change menu icon
+                            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
                         } else {
-                            actionBar.setHomeAsUpIndicator(R.drawable.menu_button_icon);//change menu icon
+                            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);//change menu icon
 
                         }
                         setTittle(getResources().getString(R.string.menu_home));
@@ -638,7 +629,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
 
 
 }

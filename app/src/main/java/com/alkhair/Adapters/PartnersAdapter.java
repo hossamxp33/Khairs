@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.codesroots.tourismgroup.presentation.screens.details.ChairtyDetailsFragment;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -52,12 +53,17 @@ public class PartnersAdapter extends RecyclerView.Adapter<PartnersAdapter.Partne
     public void onBindViewHolder(@NonNull PartnersAdapter.PartnerViewHolder holder, int position) {
 
      //   Picasso.with(activity).load(result.get(position).getCharityLogoPath()).error(R.drawable.no_image).into(holder.binding.Img);
+
+
+
        loudImage(activity,holder.binding.Img,result.get(position).getCharityLogoPath());
+
         holder.binding.Img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("chairty_id",  result.get(position).getCharityId());
+
                 Fragment fragment  = new ChairtyDetailsFragment();
                 fragment.setArguments(bundle);
                 FragmentTransaction mFragmentTransaction = activity.getSupportFragmentManager().beginTransaction();

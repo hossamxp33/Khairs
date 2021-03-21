@@ -69,8 +69,14 @@ public class NewsFragment extends Fragment {
 
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
-
-                getFragmentManager().popBackStack();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                    fm.popBackStack();
+                }
+//                fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                HomeFragment fragment = new HomeFragment();
+//                ((MainActivity) getActivity()).showFragment(fragment);
+                getFragmentManager().popBackStackImmediate();
                 BroadcastHelper.sendInform(getActivity(), "go_to_home");
             }});
         getNews();

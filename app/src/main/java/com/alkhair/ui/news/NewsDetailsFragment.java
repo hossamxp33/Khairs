@@ -66,7 +66,7 @@ public class NewsDetailsFragment extends Fragment{
 
 
         ((MainActivity) getActivity()).hideImageIcon();
-        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.my_donations));
+        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.newsdetails));
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

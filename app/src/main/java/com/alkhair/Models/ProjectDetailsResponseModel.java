@@ -1,5 +1,8 @@
 package com.alkhair.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class ProjectDetailsResponseModel {
         this.result = result;
     }
 
-    public static class ResultBean implements Serializable {
+    public static class ResultBean implements Parcelable {
         /**
          * CharityId : 1
          * CharityName_En : null
@@ -64,6 +67,71 @@ public class ProjectDetailsResponseModel {
         private Integer MediaId;
         private String MediaPath;
         private Integer MediaType;
+
+        protected ResultBean(Parcel in) {
+            if (in.readByte() == 0) {
+                CharityId = null;
+            } else {
+                CharityId = in.readInt();
+            }
+            CharityName_Ar = in.readString();
+            if (in.readByte() == 0) {
+                ProjectId = null;
+            } else {
+                ProjectId = in.readInt();
+            }
+            ProjectName_Ar = in.readString();
+            if (in.readByte() == 0) {
+                ProjectTypeId = null;
+            } else {
+                ProjectTypeId = in.readInt();
+            }
+            ProjectDescription_Ar = in.readString();
+            if (in.readByte() == 0) {
+                TargetedAmount = null;
+            } else {
+                TargetedAmount = in.readDouble();
+            }
+            if (in.readByte() == 0) {
+                CollectedAmount = null;
+            } else {
+                CollectedAmount = in.readDouble();
+            }
+            if (in.readByte() == 0) {
+                CollectedByOther = null;
+            } else {
+                CollectedByOther = in.readDouble();
+            }
+            if (in.readByte() == 0) {
+                IsActive = null;
+            } else {
+                IsActive = in.readInt();
+            }
+            if (in.readByte() == 0) {
+                MediaId = null;
+            } else {
+                MediaId = in.readInt();
+            }
+            MediaPath = in.readString();
+            if (in.readByte() == 0) {
+                MediaType = null;
+            } else {
+                MediaType = in.readInt();
+            }
+        }
+
+        public static final Creator<ResultBean> CREATOR = new Creator<ResultBean>() {
+            @Override
+            public ResultBean createFromParcel(Parcel in) {
+                return new ResultBean(in);
+            }
+
+            @Override
+            public ResultBean[] newArray(int size) {
+                return new ResultBean[size];
+            }
+        };
+
         public Integer getCharityId() {
             return CharityId;
         }
@@ -190,6 +258,73 @@ public class ProjectDetailsResponseModel {
 
         public void setIsActive(Integer isActive) {
             IsActive = isActive;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            if (CharityId == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(CharityId);
+            }
+            dest.writeString(CharityName_Ar);
+            if (ProjectId == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(ProjectId);
+            }
+            dest.writeString(ProjectName_Ar);
+            if (ProjectTypeId == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(ProjectTypeId);
+            }
+            dest.writeString(ProjectDescription_Ar);
+            if (TargetedAmount == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeDouble(TargetedAmount);
+            }
+            if (CollectedAmount == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeDouble(CollectedAmount);
+            }
+            if (CollectedByOther == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeDouble(CollectedByOther);
+            }
+            if (IsActive == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(IsActive);
+            }
+            if (MediaId == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(MediaId);
+            }
+            dest.writeString(MediaPath);
+            if (MediaType == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(MediaType);
+            }
         }
     }
 }

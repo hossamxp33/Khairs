@@ -1,8 +1,6 @@
 package com.alkhair;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,17 +10,13 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alkhair.helper.PreferenceHelper;
 import com.alkhair.helper.Utility;
 import com.alkhair.ui.MainActivity;
-import com.alkhair.ui.campaign.CampaignDetailsFragment;
 import com.alkhair.ui.language.LanguageActivity;
 import com.alkhair.ui.login.LoginFragment;
-
-import java.util.Locale;
 
 /**
  * Created by Hossam on 11/19/2020.
@@ -42,24 +36,31 @@ public class Splash_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         helper = new PreferenceHelper(this);
-        Log.d("lang", "onCreate: "+helper.getLang());
+//        Log.d("lang", "onCreate: " + helper.getLang());
         if (helper.getLang() != null) {
-                if (helper.getLang().equals("ar")){
+            if (helper.getuser_id() != null){
+                if (helper.getLang().equals("ar")) {
+                Utility.setLocale(this, "ar");
+                helper.setLang("ar");
+            } else {
+                Utility.setLocale(this, "en");
+                helper.setLang("en");
+            }
+            handler.postDelayed(() -> go_mainAcivity(), 1500);
+        }else {
+                if (helper.getLang().equals("ar")) {
                     Utility.setLocale(this, "ar");
                     helper.setLang("ar");
-                   }else {
+                } else {
                     Utility.setLocale(this, "en");
                     helper.setLang("en");
                 }
-
-            handler.postDelayed(() -> go_mainAcivity(), 1500);
-
-        } else {
-
-            handler.postDelayed(() -> StartIntent(), 1500);
-
+                handler.postDelayed(() -> go_Login(), 1500);
+            }
         }
-
+        else {
+            handler.postDelayed(() -> StartIntent(), 1500);
+        }
 
 
     }
@@ -69,18 +70,16 @@ public class Splash_View extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void go_mainAcivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-    private void StartActivity() {
-
-        Fragment fragment  = new LoginFragment();
-        FragmentTransaction mFragmentTransaction = getSupportFragmentManager().beginTransaction();
-        mFragmentTransaction.replace(R.id.main_content, fragment);
-        mFragmentTransaction.addToBackStack(null);
-        mFragmentTransaction.commit();
-
+    private void go_Login() {
+        Intent intent = new Intent(this, LoginFragment.class);
+        startActivity(intent);
+        finish();
     }
+
 }

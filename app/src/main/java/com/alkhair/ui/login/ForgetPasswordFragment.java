@@ -22,34 +22,24 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 
-public class ForgetPasswordFragment extends Fragment {
+public class ForgetPasswordFragment extends AppCompatActivity {
     LoginViewModel viewModel;
     FragmentForgetPasswordBinding binding;
     private  long mLastClickTime = 0;
     PreferenceHelper helper ;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forget_password, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_forget_password);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        helper = new PreferenceHelper(getActivity());
-
-        ((MainActivity) getActivity()).hideImageIcon();
-        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.forget_password));
-     
+        helper = new PreferenceHelper(this);
         binding.confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +51,7 @@ public class ForgetPasswordFragment extends Fragment {
             }
         });
     }
+
 
     private void reset() {
         String emil;
@@ -79,29 +70,29 @@ public class ForgetPasswordFragment extends Fragment {
         }
 
 
-                Utility.showDialog(getActivity());
+                Utility.showDialog(this);
                  viewModel.reset(emil , new GetCallBack() {
                     @Override
                     public void getCallBack(boolean isOk, int requestCode, Object o) {
 
                         if (isOk) {
-                            Utility.hideKeyboard(getActivity());
+                            Utility.hideKeyboard(ForgetPasswordFragment.this);
                             Utility.hideDialog();
                             ResetPasswordResponseModel response = (ResetPasswordResponseModel) o;
                             if (response.getSuccess().equals("true")){
                                 // save data object
-                                BroadcastHelper.sendInform(getActivity(), "go_to_home");
+                                BroadcastHelper.sendInform(ForgetPasswordFragment.this, "go_to_home");
                             }
                             else {
 
-                                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ForgetPasswordFragment.this, getApplicationContext().getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                             }
 
                         }
                         else {
-                            Utility.hideKeyboard(getActivity());
+                            Utility.hideKeyboard(ForgetPasswordFragment.this);
                             Utility.hideDialog();
-                            Toast.makeText(getActivity(), getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgetPasswordFragment.this, getString(R.string.connection_error), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

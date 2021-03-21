@@ -55,13 +55,13 @@ public class ProjectTypesAdapter extends RecyclerView.Adapter<ProjectTypesAdapte
         }
         if (helper.getLang().equals("ar")) {
             if (result.get(position).getName_ar() != null) {
-                holder.binding.name.setText(result.get(position).getName_ar());
+                holder.binding.name.setText(result.get(position).getName_ar().replaceAll("\\n",""));
             }
         } else {
             if (result.get(position).getName_en() != null) {
-                holder.binding.name.setText(result.get(position).getName_en());
+                holder.binding.name.setText(result.get(position).getName_en().replaceAll("\\n",""));
             } else {
-                holder.binding.name.setText(result.get(position).getName_ar());
+                holder.binding.name.setText(result.get(position).getName_ar().replaceAll("\\n",""));
 
             }
         }

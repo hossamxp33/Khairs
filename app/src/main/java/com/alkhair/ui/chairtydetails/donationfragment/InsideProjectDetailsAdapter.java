@@ -133,7 +133,7 @@ public class InsideProjectDetailsAdapter extends RecyclerView.Adapter<InsideProj
                     }else {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("amount", input_amount);
-                    bundle.putSerializable("data", result.get(position));
+                    bundle.putParcelable("data", result.get(position));
                     Fragment fragment  = new PaymentWaysFragment();
                     fragment.setArguments(bundle);
                     FragmentTransaction mFragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
@@ -143,7 +143,8 @@ public class InsideProjectDetailsAdapter extends RecyclerView.Adapter<InsideProj
                     helper.setDonation_amount(String.valueOf(result.get(position).getCollectedAmount()));
 
                 //    projectsFragment.selectPayment();
-                }}
+                }
+                }
             });
         }
 

@@ -1,5 +1,6 @@
 package com.alkhair.ui.registration;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.KeyEvent;
@@ -18,6 +19,7 @@ import com.alkhair.helper.PreferenceHelper;
 import com.alkhair.helper.Utility;
 import com.alkhair.helper.interfaces.GetCallBack;
 import com.alkhair.ui.MainActivity;
+import com.alkhair.ui.login.LoginFragment;
 import com.alkhair.ui.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,42 +32,19 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 
-public class RegistrationFragment extends Fragment {
+public class RegistrationFragment extends AppCompatActivity {
     FragmentRegistrationBinding binding;
     private long mLastClickTime = 0;
     LoginViewModel viewModel;
     PreferenceHelper helper ;
     FragmentManager mFragmentManager;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_registration);
+        helper = new PreferenceHelper(this);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        helper = new PreferenceHelper(getActivity());
-        ((MainActivity) getActivity()).setTittle(getResources().getString(R.string.regeter));
-
-        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setVisibility(View.VISIBLE);
-        ((MainActivity) getActivity()).findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
-
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
-
-                getFragmentManager().popBackStack();
-            //    BroadcastHelper.sendInform(getActivity(), "go_to_home");
-            }
-
-        });
-
+        helper = new PreferenceHelper(getApplicationContext());
         binding.logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +56,8 @@ public class RegistrationFragment extends Fragment {
             }
         });
     }
+
+
 
 
     public boolean isEmpty(String value) {
@@ -161,7 +142,7 @@ public class RegistrationFragment extends Fragment {
         }
 
 
-        Utility.showDialog(getActivity());
+        Utility.showDialog(this);
         viewModel.Registration(request, new GetCallBack() {
             @Override
             public void getCallBack(boolean isOk, int requestCode, Object o) {
@@ -171,17 +152,19 @@ public class RegistrationFragment extends Fragment {
                     if (response.getSuccess().equals("true")) {
                         helper.setIsLogin("true");
                         helper.setuser_id(String.valueOf(response.getResult().getRegistrationId()));
-                        Utility.hideKeyboard(getActivity());
-                        BroadcastHelper.sendInform(getActivity(), "go_to_home");
+                        Utility.hideKeyboard(getApplicationContext());
+                        Intent intent = new Intent(RegistrationFragment.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
-                        Utility.hideKeyboard(getActivity());
-                        Toast.makeText(getActivity(),response.getResult().getMessageToUser(), Toast.LENGTH_LONG).show();
+                        Utility.hideKeyboard(getApplicationContext());
+                        Toast.makeText(getApplicationContext(),response.getResult().getMessageToUser(), Toast.LENGTH_LONG).show();
                     }
 
                 } else {
                     Utility.hideDialog();
-                    Utility.hideKeyboard(getActivity());
-                    Toast.makeText(getActivity(),getActivity().getResources(). getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+                    Utility.hideKeyboard(getApplicationContext());
+                    Toast.makeText(getApplicationContext(),getApplicationContext().getResources(). getString(R.string.connection_error), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -197,26 +180,5 @@ public class RegistrationFragment extends Fragment {
         mFragmentTransaction.commit();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getView() == null) {
-            return;
-        }
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-                  //  BroadcastHelper.sendInform(getActivity(), "go_to_home");
 
-                }
-
-                return false;
-
-            }
-        });
-    }
 }
