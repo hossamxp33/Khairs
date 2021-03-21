@@ -50,8 +50,8 @@ class  DataRepo {
     }
 
     //GGetProjectsDetails
-    fun GetProjectsDetails(id: Int,livedata: MutableLiveData<ProjectDetailsResponseModel>?) {
-        getServergetway().GetProjectsDetails(id)
+    fun GetProjectsDetails(id: Int,charityid: Int,livedata: MutableLiveData<ProjectDetailsResponseModel>?) {
+        getServergetway().GetProjectsDetails(id,charityid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { data -> data }

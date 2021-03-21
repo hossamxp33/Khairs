@@ -17,7 +17,7 @@ interface APIServices {
             Observable<ChairtyDetails>
 
     @GET("http://test.e.net.kw/KuwaitAlKhairAPI/API/PROJECT/GetAllProjects")/*{company_id}*/
-    fun GetProjectsDetails(@Query("projectCategoryID")id: Int):
+    fun GetProjectsDetails(@Query("projectCategoryID")id: Int,@Query("projectCategoryID")charityid: Int):
             Observable<ProjectDetailsResponseModel>
 
 

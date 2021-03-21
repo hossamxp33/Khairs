@@ -78,8 +78,8 @@ public class MainViewModel(apiService: APIServices) : ViewModel() {
     fun  get_ChairtyDetails(id: Int){
         DateRepoCompnay.GetChairtyDetails(id,ChairtyDetailsResponseLD)
     }
-    fun  GetProjectsDetails(id: Int){
-        DateRepoCompnay.GetProjectsDetails(id,ProjectsDetailsResponseLD)
+    fun  GetProjectsDetails(id: Int,charityid: Int){
+        DateRepoCompnay.GetProjectsDetails(id,charityid,ProjectsDetailsResponseLD)
     }
 
     fun  GetProjectsTypes(){

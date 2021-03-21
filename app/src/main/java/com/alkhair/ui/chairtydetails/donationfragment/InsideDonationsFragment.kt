@@ -129,7 +129,7 @@ class InsideDonationsFragment : Fragment() , ContentListener {
      //   companydetails!!.clear()
         Project_id = item.id
         progressBar.visibility = View.VISIBLE
-        viewModel.GetProjectsDetails(Project_id!!)
+        viewModel.GetProjectsDetails(Project_id!!,dataa!!.get(0).charityId)
 
     }
 
